@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
     --black: #1D1F21;
+    --darker: #1A1A1A;
     --orange: #FF6600;
+    --gray: #444648;
+    --white: #F5F5F5;
 }
 
 * {
@@ -9,27 +14,41 @@
     box-sizing: border-box;
 }
 
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
 body {
+    font-family: "Noto Sans", sans-serif;
     background-color: var(--black);
     color: #F5F5F5;
     display: grid;
     grid-template-areas:
         "nav nav"
         "header header"
-        "aside main"
+        "content content"
         "footer footer";
     grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 300px 1fr 40px;
+    grid-template-rows: 80px auto 1fr 80px;
     gap: 24px;
     min-height: 100vh;
 }
 
 .navbar {
+    grid-area: nav;
     background-color: var(--orange);
+    align-content: center;
+}
+
+.navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    grid-area: nav;
+}
+
+.logo {
+    font-weight: bold;
 }
 
 .logo span {
@@ -39,30 +58,69 @@ body {
 .nav-menu ul {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 24px;
 }
 
 .header {
-    display: grid;
     grid-area: header;
+}
+
+.header .container {
+    display: grid;
     padding: 24px 0;
     grid-template-columns: repeat(3, 1fr);
     /* 1fr 1fr 1fr */
     gap: 12px;
+    height: 500px;
 }
 
 .header section {
-    background-color: #5b5c5c;
+    display: grid;
+    align-content: center;
+    text-align: center;
+    padding: 32px;
+    font-size: 24px;
+    border-radius: 24px;
+    background-size: cover;
+    background-position: center;
+}
+
+.header section p {
+    font-family: "Gloria Hallelujah", sans-serif;
+    font-size: 20px;
 }
 
 .header .primary {
+    font-size: 32px;
     grid-column: span 2;
     grid-row: span 2;
+    text-align: left;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/banner.jpg");
+}
+
+.header .primary p {
+    font-size: 24px;
+}
+
+.header section:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/agregados.jpg");
+}
+
+.header section:nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/promociones.jpg");
 }
 
 main {
     grid-area: main;
+}
+
+.container:has(main) {
     display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: "aside main";
+    grid-area: content;
     gap: 16px;
 }
 
@@ -73,11 +131,22 @@ main {
 }
 
 .product-card {
-    background-color: aquamarine;
+    background-color: var(--gray);
 }
 
 .product-card img {
     width: 100%;
+}
+
+.product-card div {
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+}
+
+.product-card div p:nth-of-type(2) {
+    justify-self: end;
+    font-weight: bold;
 }
 
 .filters {
@@ -85,6 +154,26 @@ main {
     max-width: 300px;
     display: grid;
     gap: 16px;
+}
+
+.filters section h3 {
+    background-size: cover;
+    background-position: center;
+    height: 80px;
+    align-content: center;
+    border-radius: 16px;
+}
+
+.filters section :nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/hamburger.jpg");
+}
+
+.filters section :nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/acompañamientos.jpg");
+}
+
+.filters section :nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/postres.jpg");
 }
 
 .filters section {
@@ -104,8 +193,38 @@ main,
 
 .footer {
     grid-area: footer;
+    background-color: var(--darker);
+    align-content: center;
+}
+
+.footer .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--black);
+    font-family: "Noto Sans", sans-serif;
+    font-weight: bold;
+}
+
+button.primary {
+    background-color: #FF6600;
+    color: var(--white);
+}
+
+button.secondary {
+    border: 1px solid var(white);
+    background: transparent;
+    color: var(--white);
+}
+
+button.thrird {
+    background-color: var(--white);
 }
 
 @media (max-width: 768px) {
@@ -113,13 +232,18 @@ main,
         grid-template-areas:
             "nav nav"
             "header header"
-            "aside aside"
-            "main main"
+            "conent content"
             "footer footer";
         grid-template-rows: auto;
     }
 
-    .header {
+    .container:has(main) {
+        grid-template-rows:
+            "aside"
+            "main";
+    }
+
+    .header .container {
         grid-template-columns: 1fr;
     }
 
@@ -136,11 +260,11 @@ main,
 @media (min-width: 769px) and (max-width: 1200px) {
     body {
         grid-template-areas:
-        "nav nav"
-        "header header"
-        "aside aside"
-        "main main"
-        "footer footer";
+            "nav nav"
+            "header header"
+            "aside aside"
+            "main main"
+            "footer footer";
         grid-template-rows: auto;
     }
 }
