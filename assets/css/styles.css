@@ -12,6 +12,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -132,10 +133,22 @@ main {
 
 .product-card {
     background-color: var(--gray);
+    transition: all 0.3s;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card:hover img {
+    filter: grayscale(1);
+    transform: scale(1.1);
 }
 
 .product-card img {
     width: 100%;
+    transition: all 0.3s;
 }
 
 .product-card div {
@@ -215,6 +228,11 @@ button {
 button.primary {
     background-color: #FF6600;
     color: var(--white);
+    transition: background-color 0.3s;
+}
+
+button.primary:hover {
+    background-color: #c95000;
 }
 
 button.secondary {
